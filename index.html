@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🎉We are getting married!🎉</title>
+  <title>🎉We are getting married!💍🎉</title>
   <style>
     body {
       font-family: "Noto Sans", sans-serif;
@@ -16,26 +16,28 @@
       height: 100vh;
       margin: 0;
       text-align: center;
+      overflow: hidden;
     }
     h1 {
-      font-size: 2em;
+      font-size: clamp(1rem, 6vw, 2.5rem); /* responsive between 1rem–2.5rem */
       margin-bottom: 0.5em;
+      white-space: nowrap; /* prevent wrapping */
     }
     #dday {
-      font-size: 2.5em;
+      font-size: clamp(1.2rem, 8vw, 3rem); /* responsive between 1.2rem–3rem */
       font-weight: bold;
       color: #00d084;
       margin-bottom: 0.3em;
+      white-space: nowrap; /* keep D-day in one line */
     }
   </style>
 </head>
 <body>
-  <h1>🎉We are getting married!🎉</h1>
+  <h1>🎉We are getting married!💍🎉</h1>
   <div id="dday">Loading...</div>
 
   <script>
-    // 👉 Set your reference date/time here (in KST)
-    const referenceDate = new Date("2026-04-25T17:00:00+09:00"); // example: Christmas 2025
+    const referenceDate = new Date("2026-04-25T17:00:00+09:00");// reference date/time (in KST)
     const refString = referenceDate.toISOString().replace("T", " ").substring(0, 19);
 
     function updateCountdown() {
