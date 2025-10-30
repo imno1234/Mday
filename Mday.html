@@ -1,39 +1,46 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>오늘 날짜 표시</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-Time Clock</title>
   <style>
     body {
-      font-family: "Noto Sans KR", sans-serif;
+      font-family: "Noto Sans", sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #f2f2f2;
+      margin: 0;
     }
     h1 {
-      color: #333;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
-    .date {
-      font-size: 1.8em;
-      color: #0078d7;
-      margin-top: 10px;
+    #clock {
+      font-size: 3em;
+      letter-spacing: 2px;
     }
   </style>
 </head>
 <body>
-  <h1>QR 코드 인식 결과</h1>
-  <div class="date" id="today"></div>
+  <h1>🕒 Current Time</h1>
+  <div id="clock">Loading...</div>
 
   <script>
-    const now = new Date();
-    const formatted = now.getFullYear() + "-" +
-      String(now.getMonth()+1).padStart(2, '0') + "-" +
-      String(now.getDate()).padStart(2, '0');
-    document.getElementById("today").innerText = `오늘 날짜: ${formatted}`;
+    function updateClock() {
+      const now = new Date();
+      // Convert to Korean Standard Time (UTC+9)
+      const kst = new Date(now.getTime() + (9 * 60 * 60 * 1000));
+      const time = kst.toISOString().substring(11, 19);
+      const date = kst.toISOString().substring(0, 10);
+      document.getElementById("clock").innerText = `${date} ${time} (KST)`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
   </script>
 </body>
 </html>
