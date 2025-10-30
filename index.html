@@ -5,18 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🎉We are getting married!💍🎉</title>
   <style>
-    body {
-      font-family: "Noto Sans", sans-serif;
+    html, body {
+      height: 100%;
+      margin: 0;
       background: #0d1117;
       color: #e6edf3;
+      font-family: "Noto Sans", sans-serif;
+    }
+    body {
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
+      justify-content: center;  /* horizontal center */
+      align-items: center;      /* vertical center */
       text-align: center;
       overflow: hidden;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     h1 {
       font-size: clamp(1rem, 6vw, 2.5rem); /* responsive between 1rem–2.5rem */
