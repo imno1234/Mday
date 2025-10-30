@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>D-Day Countdown 🎉</title>
+  <title>🎉We are getting married🎉</title>
   <style>
     body {
       font-family: "Noto Sans", sans-serif;
@@ -27,22 +27,11 @@
       color: #00d084;
       margin-bottom: 0.3em;
     }
-    #time {
-      font-size: 1.4em;
-      color: #58a6ff;
-    }
-    #reference {
-      margin-top: 10px;
-      font-size: 1em;
-      color: #8b949e;
-    }
   </style>
 </head>
 <body>
-  <h1>🎉 D-Day Countdown 🎉</h1>
+  <h1>🎉We are getting married🎉</h1>
   <div id="dday">Loading...</div>
-  <div id="time"></div>
-  <div id="reference"></div>
 
   <script>
     // 👉 Set your reference date/time here (in KST)
@@ -61,14 +50,7 @@
       const minutes = Math.floor((absDiff / (1000 * 60)) % 60);
       const seconds = Math.floor((absDiff / 1000) % 60);
 
-      let display;
-      if (diffMs > 0) display = `D-${days}`;
-      else if (diffMs < 0) display = `D+${days}`;
-      else display = "🎉 D-DAY 🎉";
-
-      document.getElementById("dday").innerText = display;
-      document.getElementById("time").innerText = `${sign}${days}d ${hours}h ${minutes}m ${seconds}s`;
-      document.getElementById("reference").innerText = `Reference: ${refString} (KST)`;
+      document.getElementById("dday").innerText = `D${sign}${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
     updateCountdown();
