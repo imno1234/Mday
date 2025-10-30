@@ -15,15 +15,21 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      text-align: center;
     }
     h1 {
       font-size: 2em;
-      margin-bottom: 0.3em;
+      margin-bottom: 0.5em;
     }
     #dday {
-      font-size: 3em;
-      letter-spacing: 2px;
+      font-size: 2.5em;
+      font-weight: bold;
       color: #00d084;
+      margin-bottom: 0.3em;
+    }
+    #time {
+      font-size: 1.4em;
+      color: #58a6ff;
     }
     #reference {
       margin-top: 10px;
@@ -35,34 +41,38 @@
 <body>
   <h1>🎉 D-Day Countdown 🎉</h1>
   <div id="dday">Loading...</div>
+  <div id="time"></div>
   <div id="reference"></div>
 
   <script>
-    // 👉 Set your reference date here (YYYY-MM-DD)
-    const referenceDate = new Date("2025-12-25T00:00:00+09:00"); // Example: Christmas 2025
-    const refString = referenceDate.toISOString().split("T")[0];
+    // 👉 Set your reference date/time here (in KST)
+    const referenceDate = new Date("2025-12-25T00:00:00+09:00"); // example: Christmas 2025
+    const refString = referenceDate.toISOString().replace("T", " ").substring(0, 19);
 
-    function updateDday() {
+    function updateCountdown() {
       const now = new Date();
       const kstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000); // convert to KST
-      const diffTime = referenceDate - kstNow;
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const diffMs = referenceDate - kstNow;
+      const sign = diffMs >= 0 ? "-" : "+";
+      const absDiff = Math.abs(diffMs);
+
+      const days = Math.floor(absDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((absDiff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((absDiff / (1000 * 60)) % 60);
+      const seconds = Math.floor((absDiff / 1000) % 60);
 
       let display;
-      if (diffDays > 0) {
-        display = `D-${diffDays}`;
-      } else if (diffDays < 0) {
-        display = `D+${Math.abs(diffDays)}`;
-      } else {
-        display = "🎉 D-DAY 🎉";
-      }
+      if (diffMs > 0) display = `D-${days}`;
+      else if (diffMs < 0) display = `D+${days}`;
+      else display = "🎉 D-DAY 🎉";
 
       document.getElementById("dday").innerText = display;
-      document.getElementById("reference").innerText = `Reference date: ${refString} (KST)`;
+      document.getElementById("time").innerText = `${sign}${days}d ${hours}h ${minutes}m ${seconds}s`;
+      document.getElementById("reference").innerText = `Reference: ${refString} (KST)`;
     }
 
-    updateDday();
-    setInterval(updateDday, 1000 * 60 * 10); // update every 10 minutes
+    updateCountdown();
+    setInterval(updateCountdown, 1000); // update every second
   </script>
 </body>
 </html>
